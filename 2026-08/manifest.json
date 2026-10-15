@@ -1,0 +1,89 @@
+{
+  "mes": "2026-08",
+  "gerado_em": "2026-09-24T13:53:29.376Z",
+  "versao_esquema": 1,
+  "licenca": {
+    "nome": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "inicio_do_registo": "2026-08-07",
+  "periodo": {
+    "de": "2026-08-07",
+    "ate": "2026-08-31"
+  },
+  "ficheiros": [
+    {
+      "nome": "orgaos.csv.gz",
+      "tabela": "orgaos",
+      "bytes": 12576,
+      "sha256": "b8b274cb55e205de4c02616d114e7b0d38fb9acbee11228f288776d75368aeef",
+      "linhas": 62
+    },
+    {
+      "nome": "donos.csv.gz",
+      "tabela": "donos",
+      "bytes": 1388,
+      "sha256": "49f66f7e86f4fb917a4231945d893e1afb6d2e4aca1c7e1392c9aec6a70f1e31",
+      "linhas": 52
+    },
+    {
+      "nome": "historico-propriedade.csv.gz",
+      "tabela": "historico-propriedade",
+      "bytes": 11602,
+      "sha256": "d9982b41b7103f014d157e1b3ddd948778cb5d1045a4c6d54a30dd901a03e3e4",
+      "linhas": 62
+    },
+    {
+      "nome": "feeds.csv.gz",
+      "tabela": "feeds",
+      "bytes": 1499,
+      "sha256": "a5249e5f12cc7f186a98eb975b44d026cc374f93d96640109cddc7f6ff99a08c",
+      "linhas": 66
+    },
+    {
+      "nome": "historias.csv.gz",
+      "tabela": "historias",
+      "bytes": 1048243,
+      "sha256": "02c5cb7d9b20f44b221ea131471f4b87599c27b5b934074721dddaa40e14aa7c",
+      "linhas": 25103
+    },
+    {
+      "nome": "artigos.csv.gz",
+      "tabela": "artigos",
+      "bytes": 2328177,
+      "sha256": "a3500ba66fd18288d4f9ed828c8cc2e0c4cde9ba21e252d0fbf1fc99502fa3b0",
+      "linhas": 47329
+    },
+    {
+      "nome": "texto-partilhado.csv.gz",
+      "tabela": "texto-partilhado",
+      "bytes": 116632,
+      "sha256": "55be93fa33637060c25385c5e4ce508d80b38d8cce8062351fe61b6db1a6c791",
+      "linhas": 39416
+    },
+    {
+      "nome": "versoes-de-titulo.csv.gz",
+      "tabela": "versoes-de-titulo",
+      "bytes": 3393,
+      "sha256": "1f4db8a83f260108ba2043d5bf95b71832d118b241e208473a93152539ac142d",
+      "linhas": 525
+    },
+    {
+      "nome": "esquema.json",
+      "tabela": null,
+      "bytes": 12626,
+      "sha256": "7e4d2aead1940ad7394ecf2e7372fcc7ad462757b8edcf27a1042729815dee00",
+      "linhas": null
+    }
+  ],
+  "contagens": {
+    "orgaos": 62,
+    "donos": 52,
+    "historico-propriedade": 62,
+    "feeds": 66,
+    "historias": 25103,
+    "artigos": 47329,
+    "texto-partilhado": 39416,
+    "versoes-de-titulo": 525
+  }
+}

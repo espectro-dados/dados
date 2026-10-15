@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Se usar estes dados, cite a versão que usou, com a data em que foi gerada."
+type: dataset
+title: "espectro: registo da imprensa portuguesa"
+version: "2026-08"
+date-released: 2026-09-24
+url: "https://oespectro.eu/dados"
+license: CC-BY-4.0
+# doi:
+authors:
+  - name: espectro
+    website: "https://oespectro.eu"
+    email: contacto@oespectro.eu
+contact:
+  - name: espectro
+    email: contacto@oespectro.eu
+keywords:
+  - imprensa portuguesa
+  - órgãos de informação
+  - donos
+  - histórias
+  - artigos
+  - fontes
+  - versões de título
+  - texto partilhado
+abstract: "O que o espectro registou da imprensa portuguesa, em ficheiros mensais que não mudam. Dados derivados (contagens, datas, identificadores, endereços, notas de propriedade), em CSV UTF-8 comprimido com gzip, uma tabela por ficheiro, sem os títulos nem os textos dos artigos."
