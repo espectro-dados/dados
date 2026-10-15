@@ -2,6 +2,8 @@
 
 O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 62 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o dono de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
 
+![Artigos por grupo proprietário, setembro de 2026](https://oespectro.eu/medicoes/2026-09/grafico/donos.png)
+
 ## Ficheiros de cada versão
 
 | Ficheiro | Conteúdo |
@@ -19,6 +21,19 @@ O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os fee
 | `SHA256SUMS` | As mesmas somas, para `sha256sum -c SHA256SUMS`. |
 
 CSV em UTF-8 sem BOM, comprimido com gzip. Instantes em ISO 8601, UTC. Listas separadas por `|`. A descrição de cada coluna está no `esquema.json` da versão e em https://oespectro.eu/dados#tabelas.
+
+## Ler uma versão
+
+```python
+import pandas as pd
+
+artigos = pd.read_csv("2026-09/artigos.csv.gz")
+orgaos = pd.read_csv("2026-09/orgaos.csv.gz")
+por_dono = artigos.merge(orgaos[["orgao", "dono"]], on="orgao").groupby("dono").size()
+print(por_dono.sort_values(ascending=False).head(10))
+```
+
+Antes de ler, `sha256sum -c SHA256SUMS` dentro da pasta da versão confere os ficheiros.
 
 ## O que não está aqui
 
