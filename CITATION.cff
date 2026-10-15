@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "Se usar estes dados, cite a versão que usou, com a data em que foi gerada."
 type: dataset
 title: "espectro: registo da imprensa portuguesa"
-version: "2026-08"
-date-released: 2026-09-24
+version: "2026-09"
+date-released: 2026-10-02
 url: "https://oespectro.eu/dados"
 license: CC-BY-4.0
 # doi:

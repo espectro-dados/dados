@@ -1,0 +1,392 @@
+{
+  "versao_esquema": 2,
+  "licenca": {
+    "nome": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "alteracoes": [
+    {
+      "versao_esquema": 2,
+      "desde_a_versao": "2026-09",
+      "texto": "artigos.publicado_em nunca é posterior a artigos.recolhido_em. Quando o órgão declara uma data posterior à recolha, fica a da recolha, porque um artigo que o sítio já tinha lido estava publicado. Uma data sem fuso lê-se na hora de Lisboa; na versão 2026-08 foi lida como UTC, e as do Notícias ao Minuto têm lá uma hora a mais. historias.primeira_publicacao e historias.ultimo_artigo saem destas datas. A versão 2026-08 tem os dois erros, descritos na página dela. Uma data de meia-noite em ponto na hora de Lisboa, lida entre 3 e 24 horas depois, é um dia sem hora, e fica a da recolha. Em texto-partilhado, a terceira coluna é orgao, o identificador do órgão; na versão 2026-08 chamava-se artigo e trazia o número interno do órgão. artigos.seccoes passa a ter, num feed geral cujas etiquetas não nomeiam secção nenhuma, a secção que o endereço do artigo nomeia, exceto na RTP."
+    }
+  ],
+  "tabelas": [
+    {
+      "nome": "orgaos",
+      "ficheiro": "orgaos.csv.gz",
+      "descricao": "Os órgãos do registo, tal como estavam no dia em que a versão foi gerada. Um por linha, incluindo os que cessaram.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Identificador estável; é o da página /orgaos/<orgao>."
+        },
+        {
+          "nome": "nome",
+          "tipo": "texto",
+          "descricao": "Nome do título."
+        },
+        {
+          "nome": "sitio",
+          "tipo": "texto",
+          "descricao": "Endereço do sítio do órgão."
+        },
+        {
+          "nome": "ambito",
+          "tipo": "texto",
+          "descricao": "national, regional ou specialist."
+        },
+        {
+          "nome": "tipo",
+          "tipo": "texto",
+          "descricao": "print, digital, tv, radio ou agency."
+        },
+        {
+          "nome": "regiao",
+          "tipo": "texto",
+          "descricao": "O que o órgão diz cobrir, nas suas palavras; vazio nos nacionais."
+        },
+        {
+          "nome": "regiao_chave",
+          "tipo": "texto",
+          "descricao": "A região NUTS II a que a página /regioes o atribui; vazio nos nacionais."
+        },
+        {
+          "nome": "nivel",
+          "tipo": "texto",
+          "descricao": "Caracterização do título (ver /orgaos); vazio quando ainda não foi feita."
+        },
+        {
+          "nome": "dono",
+          "tipo": "texto",
+          "descricao": "O grupo ou entidade proprietária, como em /donos."
+        },
+        {
+          "nome": "tipo_de_dono",
+          "tipo": "texto",
+          "descricao": "estado, poder_local, igreja, partido, associacao, cooperativa, empresa, pessoa ou vazio."
+        },
+        {
+          "nome": "activo",
+          "tipo": "booleano",
+          "descricao": "Se o órgão entra hoje nas listas do sítio."
+        },
+        {
+          "nome": "cessou_em",
+          "tipo": "data",
+          "descricao": "Data em que deixou de publicar, quando se sabe."
+        },
+        {
+          "nome": "politica_de_exibicao",
+          "tipo": "texto",
+          "descricao": "title_lead ou title_only: se o sítio mostra o lead deste órgão ou só o título."
+        },
+        {
+          "nome": "nota_de_propriedade",
+          "tipo": "texto",
+          "descricao": "A nota de propriedade escrita por nós, com as datas que refere."
+        },
+        {
+          "nome": "fontes_de_propriedade",
+          "tipo": "lista",
+          "descricao": "Os endereços das fontes públicas dessa nota, valores separados por «|»."
+        }
+      ]
+    },
+    {
+      "nome": "donos",
+      "ficheiro": "donos.csv.gz",
+      "descricao": "Os proprietários, um por linha, com os títulos que detêm no registo.",
+      "campos": [
+        {
+          "nome": "dono",
+          "tipo": "texto",
+          "descricao": "Nome do grupo ou entidade."
+        },
+        {
+          "nome": "tipo_de_dono",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.tipo_de_dono."
+        },
+        {
+          "nome": "n_titulos",
+          "tipo": "inteiro",
+          "descricao": "Títulos do registo com este dono."
+        },
+        {
+          "nome": "n_titulos_activos",
+          "tipo": "inteiro",
+          "descricao": "Desses, os que estão ativos."
+        },
+        {
+          "nome": "titulos",
+          "tipo": "lista",
+          "descricao": "Os identificadores dos títulos, valores separados por «|»."
+        }
+      ]
+    },
+    {
+      "nome": "historico-propriedade",
+      "ficheiro": "historico-propriedade.csv.gz",
+      "descricao": "Cada leitura registada da propriedade de um órgão, desde 24/09/2026. A linha mais antiga de cada órgão é o estado nesse dia e a nota diz desde quando; as seguintes são alterações, com o instante em que ficaram registadas.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "registado_em",
+          "tipo": "instante",
+          "descricao": "Quando esta leitura entrou no registo (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "dono",
+          "tipo": "texto",
+          "descricao": "O dono nessa leitura."
+        },
+        {
+          "nome": "tipo_de_dono",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.tipo_de_dono."
+        },
+        {
+          "nome": "nota_de_propriedade",
+          "tipo": "texto",
+          "descricao": "A nota nessa leitura."
+        },
+        {
+          "nome": "fontes_de_propriedade",
+          "tipo": "lista",
+          "descricao": "Os endereços das fontes nessa leitura, valores separados por «|»."
+        },
+        {
+          "nome": "cessou_em",
+          "tipo": "data",
+          "descricao": "Como em orgaos.cessou_em."
+        },
+        {
+          "nome": "origem",
+          "tipo": "texto",
+          "descricao": "inicial para a fotografia de 24/09/2026; insert ou update para as leituras seguintes."
+        }
+      ]
+    },
+    {
+      "nome": "feeds",
+      "ficheiro": "feeds.csv.gz",
+      "descricao": "As fontes que o sítio lê em cada órgão (RSS, Atom, mapas de notícias), com o estado da leitura no dia da versão.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "url",
+          "tipo": "texto",
+          "descricao": "Endereço da fonte."
+        },
+        {
+          "nome": "tipo",
+          "tipo": "texto",
+          "descricao": "O formato da fonte."
+        },
+        {
+          "nome": "seccao",
+          "tipo": "texto",
+          "descricao": "A secção a que a fonte corresponde no órgão; geral quando é o mastro."
+        },
+        {
+          "nome": "activa",
+          "tipo": "booleano",
+          "descricao": "Se está a ser lida."
+        },
+        {
+          "nome": "ultima_leitura_ok",
+          "tipo": "instante",
+          "descricao": "Última leitura com sucesso (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "ultimo_item_novo",
+          "tipo": "instante",
+          "descricao": "Última vez que trouxe um artigo novo (ISO 8601, UTC, ao segundo)."
+        }
+      ]
+    },
+    {
+      "nome": "historias",
+      "ficheiro": "historias.csv.gz",
+      "descricao": "As histórias cujo primeiro artigo tem data no mês. Uma história é o grupo de artigos, de um ou mais órgãos, que o sítio juntou na altura como sendo o mesmo acontecimento; a taxa de erro desse agrupamento está na metodologia e não se corrige retroativamente.",
+      "campos": [
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "Identificador estável da história."
+        },
+        {
+          "nome": "endereco",
+          "tipo": "texto",
+          "descricao": "A página da história no sítio, onde estão os títulos e as ligações aos artigos."
+        },
+        {
+          "nome": "estado",
+          "tipo": "texto",
+          "descricao": "open, closed ou archived; archived a partir dos 90 dias sem artigo novo."
+        },
+        {
+          "nome": "primeira_publicacao",
+          "tipo": "instante",
+          "descricao": "O publicado_em mais antigo dos artigos que a história mostra (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "ultimo_artigo",
+          "tipo": "instante",
+          "descricao": "Data do artigo mais recente (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "fechada_em",
+          "tipo": "instante",
+          "descricao": "Quando o sítio deixou de lhe juntar artigos (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "n_artigos",
+          "tipo": "inteiro",
+          "descricao": "Artigos ativos na história."
+        },
+        {
+          "nome": "n_orgaos",
+          "tipo": "inteiro",
+          "descricao": "Órgãos distintos entre esses artigos."
+        },
+        {
+          "nome": "n_redacoes",
+          "tipo": "inteiro",
+          "descricao": "Redações distintas: os órgãos que publicaram o mesmo título ou o mesmo primeiro parágrafo com menos de 24 horas de intervalo contam como uma, como na metodologia. A propriedade não entra nesta conta. É o número de grupos da história em texto-partilhado."
+        },
+        {
+          "nome": "paises",
+          "tipo": "lista",
+          "descricao": "Países atribuídos à história (ISO 3166-1 alfa-2), valores separados por «|»; regra e precisão na metodologia."
+        },
+        {
+          "nome": "n_versoes_de_titulo",
+          "tipo": "inteiro",
+          "descricao": "Quantas vezes os órgãos trocaram títulos de artigos desta história."
+        }
+      ]
+    },
+    {
+      "nome": "artigos",
+      "ficheiro": "artigos.csv.gz",
+      "descricao": "Os artigos recolhidos no mês, pela data em que o sítio os leu e não pela data do órgão; sem título nem texto. Os escondidos vêm com o motivo, porque fazem parte do que se leu.",
+      "campos": [
+        {
+          "nome": "artigo",
+          "tipo": "inteiro",
+          "descricao": "Identificador estável do artigo."
+        },
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "A história a que pertence; vazio quando não foi agrupado."
+        },
+        {
+          "nome": "publicado_em",
+          "tipo": "instante",
+          "descricao": "A data que o órgão declara, lida na hora de Lisboa quando não diz o fuso; quando é posterior a recolhido_em, recolhido_em (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "recolhido_em",
+          "tipo": "instante",
+          "descricao": "Quando o sítio o leu pela primeira vez (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "endereco",
+          "tipo": "texto",
+          "descricao": "O endereço do artigo no sítio do órgão."
+        },
+        {
+          "nome": "idioma",
+          "tipo": "texto",
+          "descricao": "Código de língua detetado; quase sempre pt."
+        },
+        {
+          "nome": "estado",
+          "tipo": "texto",
+          "descricao": "active, ou hidden quando o sítio não o mostra."
+        },
+        {
+          "nome": "motivo_oculto",
+          "tipo": "texto",
+          "descricao": "opiniao, duplicado, dominio_alheio ou resumo; vazio nos ativos."
+        },
+        {
+          "nome": "seccoes",
+          "tipo": "lista",
+          "descricao": "As secções que as etiquetas do artigo no feed nomeiam, valores separados por «|»; num feed geral em que nenhuma nomeia secção, a que o endereço do artigo nomeia, exceto na RTP. A secção do próprio feed está em feeds.seccao."
+        },
+        {
+          "nome": "paises",
+          "tipo": "lista",
+          "descricao": "Países atribuídos ao artigo, valores separados por «|»."
+        },
+        {
+          "nome": "n_versoes_de_titulo",
+          "tipo": "inteiro",
+          "descricao": "Quantas vezes o órgão trocou o título deste artigo depois de o sítio o ler."
+        }
+      ]
+    },
+    {
+      "nome": "texto-partilhado",
+      "ficheiro": "texto-partilhado.csv.gz",
+      "descricao": "Os órgãos de cada história do mês, agrupados pelo texto: os que publicaram o mesmo título ou o mesmo primeiro parágrafo com menos de 24 horas de intervalo ficam no mesmo grupo, e um órgão que não partilhou texto com nenhum outro fica num grupo só seu. É o sinal «redações» da metodologia, com precisão 0,95 e recobrimento 0,48 medidos: o que aqui está junto é quase sempre partilha de texto; o que falta é muito.",
+      "campos": [
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "Como em historias.historia."
+        },
+        {
+          "nome": "grupo",
+          "tipo": "inteiro",
+          "descricao": "Número do grupo dentro da história."
+        },
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        }
+      ]
+    },
+    {
+      "nome": "versoes-de-titulo",
+      "ficheiro": "versoes-de-titulo.csv.gz",
+      "descricao": "Cada vez que um órgão trocou o título de um artigo recolhido no mês: quando, e por que ordem. Sem o texto das versões.",
+      "campos": [
+        {
+          "nome": "artigo",
+          "tipo": "inteiro",
+          "descricao": "Como em artigos.artigo."
+        },
+        {
+          "nome": "ordem",
+          "tipo": "inteiro",
+          "descricao": "1 para a primeira troca, 2 para a segunda, e assim por diante."
+        },
+        {
+          "nome": "substituido_em",
+          "tipo": "instante",
+          "descricao": "Quando o título anterior deixou de estar em vigor (ISO 8601, UTC, ao segundo)."
+        }
+      ]
+    }
+  ]
+}
