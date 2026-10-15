@@ -1,14 +1,14 @@
 # dados
 
-O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 62 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o dono de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
+O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 62 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o proprietário de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
 
-![Artigos por grupo proprietário, setembro de 2026](https://oespectro.eu/medicoes/2026-09/grafico/donos.png)
+![Artigos por grupo proprietário, setembro de 2026](https://oespectro.eu/medicoes/2026-09/grafico/proprietarios.png)
 
 ## Ficheiros de cada versão
 
 | Ficheiro | Conteúdo |
 |---|---|
-| `orgaos.csv.gz` | Os órgãos do registo no dia em que a versão foi gerada, com o dono de cada um. |
+| `orgaos.csv.gz` | Os órgãos do registo no dia em que a versão foi gerada, com o proprietário de cada um. |
 | `donos.csv.gz` | Os proprietários e os títulos que detêm. |
 | `historico-propriedade.csv.gz` | Cada leitura registada da propriedade de um órgão, com a data. |
 | `feeds.csv.gz` | As fontes lidas em cada órgão e o estado da leitura. |
@@ -29,8 +29,9 @@ import pandas as pd
 
 artigos = pd.read_csv("2026-09/artigos.csv.gz")
 orgaos = pd.read_csv("2026-09/orgaos.csv.gz")
-por_dono = artigos.merge(orgaos[["orgao", "dono"]], on="orgao").groupby("dono").size()
-print(por_dono.sort_values(ascending=False).head(10))
+# A coluna chama-se "dono" até à versão 2026-09 e "proprietario" a partir da 2026-10.
+por_proprietario = artigos.merge(orgaos[["orgao", "dono"]], on="orgao").groupby("dono").size()
+print(por_proprietario.sort_values(ascending=False).head(10))
 ```
 
 Antes de ler, `sha256sum -c SHA256SUMS` dentro da pasta da versão confere os ficheiros.
