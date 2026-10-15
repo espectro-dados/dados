@@ -51,7 +51,7 @@ Uma versão fecha depois de o mês acabar e os ficheiros não voltam a mudar. Um
 
 ## Licença e citação
 
-CC BY 4.0, texto integral em `LICENSE`. Cite a versão e não o repositório, por exemplo «espectro, oespectro.eu/dados/2026-09, gerada a 2 de outubro de 2026». O `CITATION.cff` tem a citação da versão mais recente.
+CC BY 4.0, texto integral em `LICENSE`. Cite a versão e não o repositório, por exemplo «espectro, oespectro.eu/dados/2026-09, gerada a 2 de outubro de 2026». O `CITATION.cff` tem a citação da versão mais recente. A versão 2026-08 está também no Zenodo, com o DOI [10.5281/zenodo.23396490](https://doi.org/10.5281/zenodo.23396490); o DOI [10.5281/zenodo.23396489](https://doi.org/10.5281/zenodo.23396489) leva sempre à versão mais recente que lá está.
 
 ## Contacto
 

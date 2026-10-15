@@ -6,7 +6,13 @@ version: "2026-09"
 date-released: 2026-10-02
 url: "https://oespectro.eu/dados"
 license: CC-BY-4.0
-# doi:
+# O DOI de conceito do Zenodo leva sempre à versão mais recente lá depositada;
+# o de cada versão está em identifiers.
+doi: 10.5281/zenodo.23396489
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23396490
+    description: "Versão 2026-08"
 authors:
   - name: espectro
     website: "https://oespectro.eu"
@@ -17,7 +23,7 @@ contact:
 keywords:
   - imprensa portuguesa
   - órgãos de informação
-  - donos
+  - proprietários
   - histórias
   - artigos
   - fontes
