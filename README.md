@@ -1,15 +1,15 @@
 # dados
 
-O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 62 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o proprietário de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
+O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 64 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o proprietário de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
 
-![Artigos por grupo proprietário, setembro de 2026](https://oespectro.eu/medicoes/2026-09/grafico/proprietarios.png)
+![Artigos por grupo proprietário, outubro de 2026](https://oespectro.eu/medicoes/2026-10/grafico/proprietarios.png)
 
 ## Ficheiros de cada versão
 
 | Ficheiro | Conteúdo |
 |---|---|
 | `orgaos.csv.gz` | Os órgãos do registo no dia em que a versão foi gerada, com o proprietário de cada um. |
-| `donos.csv.gz` | Os proprietários e os títulos que detêm. |
+| `proprietarios.csv.gz` | Os proprietários e os títulos que detêm. Até à versão 2026-09 chamava-se `donos.csv.gz`. |
 | `historico-propriedade.csv.gz` | Cada leitura registada da propriedade de um órgão, com a data. |
 | `feeds.csv.gz` | As fontes lidas em cada órgão e o estado da leitura. |
 | `historias.csv.gz` | As histórias com primeiro artigo no mês, com datas e contagens de artigos, órgãos e redações. |
@@ -27,10 +27,10 @@ CSV em UTF-8 sem BOM, comprimido com gzip. Instantes em ISO 8601, UTC. Listas se
 ```python
 import pandas as pd
 
-artigos = pd.read_csv("2026-09/artigos.csv.gz")
-orgaos = pd.read_csv("2026-09/orgaos.csv.gz")
-# A coluna chama-se "dono" até à versão 2026-09 e "proprietario" a partir da 2026-10.
-por_proprietario = artigos.merge(orgaos[["orgao", "dono"]], on="orgao").groupby("dono").size()
+artigos = pd.read_csv("2026-10/artigos.csv.gz")
+orgaos = pd.read_csv("2026-10/orgaos.csv.gz")
+# Até à versão 2026-09 a coluna chama-se "dono".
+por_proprietario = artigos.merge(orgaos[["orgao", "proprietario"]], on="orgao").groupby("proprietario").size()
 print(por_proprietario.sort_values(ascending=False).head(10))
 ```
 
@@ -46,12 +46,13 @@ Os títulos e os textos dos artigos pertencem aos órgãos que os publicaram e n
 |---|---|---|---|---|
 | `2026-08` | 7 a 31 de agosto de 2026 | 24 de setembro de 2026 | 1 | [erratas](2026-08/ERRATA.md) |
 | `2026-09` | 1 a 30 de setembro de 2026 | 2 de outubro de 2026 | 2 | |
+| `2026-10` | 1 a 31 de outubro de 2026 | 2 de novembro de 2026 | 3 | |
 
 Uma versão fecha depois de o mês acabar e os ficheiros não voltam a mudar. Um erro encontrado depois fica numa errata, na pasta da versão, com a forma de o corrigir. A versão seguinte sai no dia 2 de cada mês.
 
 ## Licença e citação
 
-CC BY 4.0, texto integral em `LICENSE`. Cite a versão e não o repositório, por exemplo «espectro, oespectro.eu/dados/2026-09, gerada a 2 de outubro de 2026». O `CITATION.cff` tem a citação da versão mais recente. A versão 2026-08 está também no Zenodo, com o DOI [10.5281/zenodo.23396490](https://doi.org/10.5281/zenodo.23396490); o DOI [10.5281/zenodo.23396489](https://doi.org/10.5281/zenodo.23396489) leva sempre à versão mais recente que lá está.
+CC BY 4.0, texto integral em `LICENSE`. Cite a versão e não o repositório, por exemplo «espectro, oespectro.eu/dados/2026-10, gerada a 2 de novembro de 2026». O `CITATION.cff` tem a citação da versão mais recente. A versão 2026-08 está também no Zenodo, com o DOI [10.5281/zenodo.23396490](https://doi.org/10.5281/zenodo.23396490); o DOI [10.5281/zenodo.23396489](https://doi.org/10.5281/zenodo.23396489) leva sempre à versão mais recente que lá está.
 
 ## Contacto
 

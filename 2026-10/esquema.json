@@ -1,0 +1,397 @@
+{
+  "versao_esquema": 3,
+  "licenca": {
+    "nome": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "alteracoes": [
+    {
+      "versao_esquema": 3,
+      "desde_a_versao": "2026-10",
+      "texto": "A tabela donos passa a chamar-se proprietarios, e o ficheiro passa a ser proprietarios.csv.gz. Nas tabelas orgaos, proprietarios e historico-propriedade, as colunas dono e tipo_de_dono passam a chamar-se proprietario e tipo_de_proprietario, com o mesmo conteúdo. O resto do esquema já dizia propriedade (nota_de_propriedade, fontes_de_propriedade, historico-propriedade), e só estas colunas usavam outra palavra. As versões 2026-08 e 2026-09 ficam como saíram, com os nomes antigos, descritos no esquema.json de cada uma."
+    },
+    {
+      "versao_esquema": 2,
+      "desde_a_versao": "2026-09",
+      "texto": "A coluna artigos.publicado_em nunca é posterior a artigos.recolhido_em. Quando o jornal indica uma data posterior à recolha, fica a da recolha, porque um artigo que já tínhamos lido estava publicado. Passamos a ler na hora de Lisboa as datas sem fuso horário. Na versão 2026-08 líamo-las como UTC, e por isso as datas do Notícias ao Minuto têm aí uma hora a mais. As colunas historias.primeira_publicacao e historias.ultimo_artigo vêm destas datas. A versão 2026-08 tem os dois erros, descritos na página dessa versão. Quando o jornal indica meia-noite em ponto, na hora de Lisboa, e lemos o artigo entre 3 e 24 horas depois, a data conta como um dia sem hora. Nesse caso fica a da recolha. Em texto-partilhado, a terceira coluna é orgao, o identificador do jornal. Na versão 2026-08 chamava-se artigo e trazia o número interno do jornal. Quando um artigo vem de um feed geral e as suas etiquetas não indicam nenhuma secção, a coluna artigos.seccoes passa a ter a secção que aparece no endereço do artigo, exceto na RTP."
+    }
+  ],
+  "tabelas": [
+    {
+      "nome": "orgaos",
+      "ficheiro": "orgaos.csv.gz",
+      "descricao": "Os jornais da nossa lista, tal como estavam no dia em que gerámos a versão. Há uma linha por jornal, incluindo os que deixaram de publicar.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Identificador do jornal, que não muda. É o mesmo do endereço /orgaos/<orgao>."
+        },
+        {
+          "nome": "nome",
+          "tipo": "texto",
+          "descricao": "Nome do jornal."
+        },
+        {
+          "nome": "sitio",
+          "tipo": "texto",
+          "descricao": "Endereço do site do jornal."
+        },
+        {
+          "nome": "ambito",
+          "tipo": "texto",
+          "descricao": "Pode ser national, regional ou specialist."
+        },
+        {
+          "nome": "tipo",
+          "tipo": "texto",
+          "descricao": "Pode ser print, digital, tv, radio ou agency."
+        },
+        {
+          "nome": "regiao",
+          "tipo": "texto",
+          "descricao": "A região que o jornal diz cobrir, com as palavras do próprio jornal. Fica vazia nos jornais nacionais."
+        },
+        {
+          "nome": "regiao_chave",
+          "tipo": "texto",
+          "descricao": "A região NUTS II a que a página /regioes atribui o jornal. Fica vazia nos jornais nacionais."
+        },
+        {
+          "nome": "nivel",
+          "tipo": "texto",
+          "descricao": "A caracterização do jornal, a mesma que aparece em /orgaos. Fica vazia enquanto não estiver feita."
+        },
+        {
+          "nome": "proprietario",
+          "tipo": "texto",
+          "descricao": "O grupo ou a entidade a que o jornal pertence, como em /proprietarios."
+        },
+        {
+          "nome": "tipo_de_proprietario",
+          "tipo": "texto",
+          "descricao": "O tipo de proprietário, que pode ser estado, poder_local, igreja, partido, associacao, cooperativa, empresa ou pessoa. Pode vir vazio."
+        },
+        {
+          "nome": "activo",
+          "tipo": "booleano",
+          "descricao": "Se o jornal aparecia nas listas do site no dia da versão."
+        },
+        {
+          "nome": "cessou_em",
+          "tipo": "data",
+          "descricao": "Data em que o jornal deixou de publicar, quando se sabe."
+        },
+        {
+          "nome": "politica_de_exibicao",
+          "tipo": "texto",
+          "descricao": "Se o site mostra o título e a primeira frase dos artigos deste jornal (title_lead) ou só o título (title_only)."
+        },
+        {
+          "nome": "nota_de_propriedade",
+          "tipo": "texto",
+          "descricao": "A nota que escrevemos sobre o proprietário do jornal, com as datas que refere."
+        },
+        {
+          "nome": "fontes_de_propriedade",
+          "tipo": "lista",
+          "descricao": "Os endereços das fontes públicas dessa nota, separados por «|»."
+        }
+      ]
+    },
+    {
+      "nome": "proprietarios",
+      "ficheiro": "proprietarios.csv.gz",
+      "descricao": "Os proprietários, um por linha, com os jornais da nossa lista que lhes pertencem.",
+      "campos": [
+        {
+          "nome": "proprietario",
+          "tipo": "texto",
+          "descricao": "Nome do grupo ou da entidade."
+        },
+        {
+          "nome": "tipo_de_proprietario",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.tipo_de_proprietario."
+        },
+        {
+          "nome": "n_titulos",
+          "tipo": "inteiro",
+          "descricao": "Número de jornais da nossa lista que pertencem a este proprietário."
+        },
+        {
+          "nome": "n_titulos_activos",
+          "tipo": "inteiro",
+          "descricao": "Quantos desses jornais estão ativos."
+        },
+        {
+          "nome": "titulos",
+          "tipo": "lista",
+          "descricao": "Os identificadores desses jornais, separados por «|»."
+        }
+      ]
+    },
+    {
+      "nome": "historico-propriedade",
+      "ficheiro": "historico-propriedade.csv.gz",
+      "descricao": "Desde 24/09/2026, guardamos aqui o que sabemos sobre o proprietário de cada jornal. A linha mais antiga de cada jornal mostra a situação nesse dia, e a nota diz desde quando era assim. As linhas seguintes são alterações, com a data e a hora em que as registámos.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "registado_em",
+          "tipo": "instante",
+          "descricao": "Data e hora em que registámos esta linha (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "proprietario",
+          "tipo": "texto",
+          "descricao": "O proprietário registado nessa altura."
+        },
+        {
+          "nome": "tipo_de_proprietario",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.tipo_de_proprietario."
+        },
+        {
+          "nome": "nota_de_propriedade",
+          "tipo": "texto",
+          "descricao": "A nota sobre o proprietário registada nessa altura."
+        },
+        {
+          "nome": "fontes_de_propriedade",
+          "tipo": "lista",
+          "descricao": "Os endereços das fontes registadas nessa altura, separados por «|»."
+        },
+        {
+          "nome": "cessou_em",
+          "tipo": "data",
+          "descricao": "Como em orgaos.cessou_em."
+        },
+        {
+          "nome": "origem",
+          "tipo": "texto",
+          "descricao": "Diz inicial nas linhas com a situação de 24/09/2026, e insert ou update nas linhas seguintes."
+        }
+      ]
+    },
+    {
+      "nome": "feeds",
+      "ficheiro": "feeds.csv.gz",
+      "descricao": "As fontes que lemos em cada jornal (RSS, Atom, mapas de notícias), e como corria a leitura de cada uma no dia da versão.",
+      "campos": [
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "url",
+          "tipo": "texto",
+          "descricao": "Endereço da fonte."
+        },
+        {
+          "nome": "tipo",
+          "tipo": "texto",
+          "descricao": "O formato da fonte."
+        },
+        {
+          "nome": "seccao",
+          "tipo": "texto",
+          "descricao": "A secção do jornal a que a fonte corresponde. É geral quando a fonte é o feed principal do jornal."
+        },
+        {
+          "nome": "activa",
+          "tipo": "booleano",
+          "descricao": "Se ainda lemos a fonte."
+        },
+        {
+          "nome": "ultima_leitura_ok",
+          "tipo": "instante",
+          "descricao": "A última vez que lemos a fonte sem erros (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "ultimo_item_novo",
+          "tipo": "instante",
+          "descricao": "A última vez que a fonte trouxe um artigo novo (ISO 8601, UTC, ao segundo)."
+        }
+      ]
+    },
+    {
+      "nome": "historias",
+      "ficheiro": "historias.csv.gz",
+      "descricao": "As histórias cujo primeiro artigo é desse mês. Uma história junta os artigos, de um ou mais jornais, que o nosso programa ligou na altura ao mesmo acontecimento. A metodologia diz quantas vezes o programa erra, e não corrigimos os grupos depois.",
+      "campos": [
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "Identificador da história, que não muda."
+        },
+        {
+          "nome": "endereco",
+          "tipo": "texto",
+          "descricao": "A página da história no site, onde estão os títulos e as ligações aos artigos."
+        },
+        {
+          "nome": "estado",
+          "tipo": "texto",
+          "descricao": "Pode ser open, closed ou archived. Passa a archived ao fim de 90 dias sem artigo novo."
+        },
+        {
+          "nome": "primeira_publicacao",
+          "tipo": "instante",
+          "descricao": "A data de publicação (publicado_em) mais antiga entre os artigos que a história mostra (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "ultimo_artigo",
+          "tipo": "instante",
+          "descricao": "Data do artigo mais recente (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "fechada_em",
+          "tipo": "instante",
+          "descricao": "Quando deixámos de lhe juntar artigos (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "n_artigos",
+          "tipo": "inteiro",
+          "descricao": "Número de artigos ativos na história."
+        },
+        {
+          "nome": "n_orgaos",
+          "tipo": "inteiro",
+          "descricao": "Número de jornais diferentes entre esses artigos."
+        },
+        {
+          "nome": "n_redacoes",
+          "tipo": "inteiro",
+          "descricao": "Número de redações diferentes, contadas como na metodologia. Os jornais que publicaram o mesmo título ou o mesmo primeiro parágrafo com menos de 24 horas de intervalo contam como uma única redação. O proprietário dos jornais não entra nesta conta. É o número de grupos da história em texto-partilhado."
+        },
+        {
+          "nome": "paises",
+          "tipo": "lista",
+          "descricao": "Os países que atribuímos à história, em códigos ISO 3166-1 alfa-2 separados por «|». A regra e a precisão estão na metodologia."
+        },
+        {
+          "nome": "n_versoes_de_titulo",
+          "tipo": "inteiro",
+          "descricao": "Quantas vezes os jornais trocaram o título de artigos desta história."
+        }
+      ]
+    },
+    {
+      "nome": "artigos",
+      "ficheiro": "artigos.csv.gz",
+      "descricao": "Os artigos que recolhemos no mês, contados pela data em que os lemos e não pela data que o jornal indica. A tabela não traz título nem texto. Os artigos escondidos também lá estão, com o motivo, porque fazem parte do que lemos.",
+      "campos": [
+        {
+          "nome": "artigo",
+          "tipo": "inteiro",
+          "descricao": "Identificador do artigo, que não muda."
+        },
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        },
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "A história a que o artigo pertence. Fica vazio quando não juntámos o artigo a nenhuma história."
+        },
+        {
+          "nome": "publicado_em",
+          "tipo": "instante",
+          "descricao": "A data que o jornal indica para a publicação (ISO 8601, UTC, ao segundo). Quando não traz fuso horário, lemo-la na hora de Lisboa. Se for posterior a recolhido_em, fica recolhido_em."
+        },
+        {
+          "nome": "recolhido_em",
+          "tipo": "instante",
+          "descricao": "Quando lemos o artigo pela primeira vez (ISO 8601, UTC, ao segundo)."
+        },
+        {
+          "nome": "endereco",
+          "tipo": "texto",
+          "descricao": "O endereço do artigo no site do jornal."
+        },
+        {
+          "nome": "idioma",
+          "tipo": "texto",
+          "descricao": "O código da língua detetada, quase sempre pt."
+        },
+        {
+          "nome": "estado",
+          "tipo": "texto",
+          "descricao": "Pode ser active, ou hidden quando não mostramos o artigo."
+        },
+        {
+          "nome": "motivo_oculto",
+          "tipo": "texto",
+          "descricao": "O motivo por que o artigo está escondido, que pode ser opiniao, duplicado, dominio_alheio ou resumo. Fica vazio nos artigos ativos."
+        },
+        {
+          "nome": "seccoes",
+          "tipo": "lista",
+          "descricao": "As secções indicadas pelas etiquetas do artigo no feed, separadas por «|». Num feed geral em que nenhuma etiqueta indica secção, fica a secção que aparece no endereço do artigo, exceto na RTP. A secção do próprio feed está em feeds.seccao."
+        },
+        {
+          "nome": "paises",
+          "tipo": "lista",
+          "descricao": "Os países que atribuímos ao artigo, separados por «|»."
+        },
+        {
+          "nome": "n_versoes_de_titulo",
+          "tipo": "inteiro",
+          "descricao": "Quantas vezes o jornal trocou o título deste artigo depois de o lermos."
+        }
+      ]
+    },
+    {
+      "nome": "texto-partilhado",
+      "ficheiro": "texto-partilhado.csv.gz",
+      "descricao": "Os jornais de cada história do mês, agrupados pelo texto. Os que publicaram o mesmo título ou o mesmo primeiro parágrafo com menos de 24 horas de intervalo ficam no mesmo grupo. Um jornal que não partilhou texto com nenhum outro fica num grupo só seu. Os grupos vêm do programa que deteta redações, descrito na metodologia. Em cada 100 cópias que o programa aponta, 95 são mesmo cópias (precisão de 0,95), por isso o que aqui aparece junto é quase sempre texto partilhado. Mas o programa só encontra 48 em cada 100 cópias que existem (sensibilidade de 0,48), por isso faltam aqui muitas.",
+      "campos": [
+        {
+          "nome": "historia",
+          "tipo": "inteiro",
+          "descricao": "Como em historias.historia."
+        },
+        {
+          "nome": "grupo",
+          "tipo": "inteiro",
+          "descricao": "Número do grupo dentro da história."
+        },
+        {
+          "nome": "orgao",
+          "tipo": "texto",
+          "descricao": "Como em orgaos.orgao."
+        }
+      ]
+    },
+    {
+      "nome": "versoes-de-titulo",
+      "ficheiro": "versoes-de-titulo.csv.gz",
+      "descricao": "Uma linha por cada vez que um jornal trocou o título de um artigo recolhido no mês, com a data e a hora da troca e a ordem em que aconteceu. A tabela não traz o texto das versões do título.",
+      "campos": [
+        {
+          "nome": "artigo",
+          "tipo": "inteiro",
+          "descricao": "Como em artigos.artigo."
+        },
+        {
+          "nome": "ordem",
+          "tipo": "inteiro",
+          "descricao": "Vale 1 na primeira troca, 2 na segunda, e assim por diante."
+        },
+        {
+          "nome": "substituido_em",
+          "tipo": "instante",
+          "descricao": "Quando o título anterior foi substituído (ISO 8601, UTC, ao segundo)."
+        }
+      ]
+    }
+  ]
+}
