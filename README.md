@@ -1,5 +1,9 @@
 # dados
 
+## In English
+
+Monthly open data on the Portuguese news media: the owner of each of 64 outlets, with a dated history of ownership records and the public source of each record, and the articles those outlets published since 7 August 2026, grouped into stories about the same event. One folder per month, CSV in UTF-8 compressed with gzip. Column descriptions are in each version's `esquema.json`, checksums in `SHA256SUMS`. Headlines and article text are not included; article URLs are. Licence: CC BY 4.0. Contact: contacto@oespectro.eu.
+
 O registo do espectro, oespectro.eu, em ficheiros mensais. O espectro lê os feeds de 64 órgãos de informação portugueses, junta numa história os artigos sobre o mesmo acontecimento e guarda quem publicou o quê e quando, desde 7 de agosto de 2026. Mantém também o registo dos órgãos, com o proprietário de cada título e as fontes dessa leitura. Este repositório tem tudo isso em CSV, uma pasta por mês, para quem queira contar, conferir ou estudar.
 
 ![Artigos por grupo proprietário, outubro de 2026](https://oespectro.eu/medicoes/2026-10/grafico/proprietarios.png)
